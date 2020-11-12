@@ -33,12 +33,12 @@
   &__inner {
     @extend %inner-width;
     padding-top: 5%;
-    padding-bottom: 30%;
-    min-height: 500px; 
-    background-image: url(../images/nerdy-whisking.png);
-    background-repeat: no-repeat;
-    background-position: bottom;
-    background-size: 300px;
+    padding-bottom: 5%; //  30%;
+    // min-height: 500px; 
+    // background-image: url(../images/nerdy-whisking.png);
+    // background-repeat: no-repeat;
+    // background-position: bottom;
+    // background-size: 300px;
     @media (min-width: $full-width) {
         background-size: 443px;
     }
