@@ -159,6 +159,10 @@
     padding-bottom: 25px;
     &--blue {
       color: $jumpsuit-blue;
+      @media (min-width: $tablet) {
+      font-size: 48px;
+      padding-bottom: 35px;
+      }
     }
 
     @media (min-width: $tablet) {
@@ -224,7 +228,7 @@
     font-size: 16px;
     border: solid 3px $mars-red;
     padding: 4px 16px;
-    display: block;
+    display: inline-block;
     text-decoration: none;
     font-weight: 700;
     text-transform: uppercase;
@@ -232,6 +236,16 @@
 
     &--primary {
       background-color: $mars-red;
+      color: white;
+
+      &:hover {
+        background-color: black;
+        border-color: black;
+      }
+    }
+
+    &--outline {
+      border: 3px solid $mars-red;
       color: white;
 
       &:hover {

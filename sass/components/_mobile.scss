@@ -21,7 +21,7 @@
     /* Mobile menu overlay*/
     #hamburger:checked ~ .mobile-menu {
         /*background-color: rgba(123, 245, 255, 0.9);*/
-        background-color: #ffe5e3; /// #2128BD; //#ff3369;
+        background-color: $jumpsuit-light-blue; // #ffe5e3; /// #2128BD; //#ff3369;
         z-index: 1;
         /*transform: translateY(0%);*/
     }
@@ -97,7 +97,7 @@
         }
         width: 25px;
         height: 5px;
-        background-color: #000; 
+        background-color: #FFF; 
         position: relative;
         -webkit-transition-duration: 0;
         -moz-transition-duration: 0;
@@ -111,7 +111,7 @@
         position: absolute;
         width: 25px;
         height: 5px;
-        background-color: #000;
+        background-color: #FFF;
         -webkit-transition-property: margin, -webkit-transform;
         -webkit-transition-duration: 0.2s;
         -moz-transition-duration: 0.2s;
