@@ -37,14 +37,15 @@
   }
 
   &--summit {
-    background: $nerd-peach;
+    background: $jumpsuit-blue;
     padding-top: 165px;
     padding-bottom: 150px;
   }
 
   &--sessions {
-    background: url(../images/background-yellow.jpg);
-    background-size: 100%;
+    //background: url(../images/background-yellow.jpg);
+    //background-size: 100%;
+    background-color: $rover-light-gold;
 
     .billboard__button-container {
       text-align: left;
@@ -142,6 +143,7 @@
     font-size: 21px;
     font-weight: 500;
     margin-bottom: 25px;
+    color: white;
 
     @media (min-width: $tablet) {
       font-size: 24px;
@@ -150,11 +152,14 @@
   }
 
   &__header {
-    color: $nerd-blue--dark;
+    color: white;
     font-size: 34px;
     font-weight: 900;
     line-height: 1.1;
     padding-bottom: 25px;
+    &--blue {
+      color: $jumpsuit-blue;
+    }
 
     @media (min-width: $tablet) {
       font-size: 48px;
@@ -217,7 +222,7 @@
 
   &__button {
     font-size: 16px;
-    border: solid 3px $nerd-blue--dark;
+    border: solid 3px $mars-red;
     padding: 4px 16px;
     display: block;
     text-decoration: none;
@@ -226,7 +231,7 @@
     transition: all .3s;
 
     &--primary {
-      background-color: $nerd-blue--dark;
+      background-color: $mars-red;
       color: white;
 
       &:hover {
@@ -341,10 +346,10 @@
 
     @media (min-width: $tablet) {
       display: inline;
-      width: 240px;
+      width: 400px; //240px;
       position: absolute;
-      bottom:-225px;
-      right: 50px;
+      bottom:-200px;
+      right: 0px;
     }
   }
 
