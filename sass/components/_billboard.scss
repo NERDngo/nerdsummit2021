@@ -112,7 +112,7 @@
   }
 
   &--about {
-    background-color: $nerd-purple;
+    background-color: $jumpsuit-very-light-blue;
 
     @media (min-width: $tablet) {
       padding-bottom: 0;
@@ -135,8 +135,9 @@
   }
 
   &--contact {
-    background: url(../images/background-purple.jpg);
-    background-size: 100%;
+    //background: url(../images/background-purple.jpg);
+    //background-size: 100%;
+    background-color: $rover-light-gold;
   }
 
   &__callout {
