@@ -29,7 +29,9 @@ loadJSON(function (response) {
 function loadJSON(callback) {
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
-    xobj.open('GET', 'https://spreadsheets.google.com/feeds/cells/17EDt6Pu6xefcwT2C1UsYB7m0Ek-Vb1Us8Azfn3a_eso/1/public/full?alt=json', true);
+    //xobj.open('GET', 'https://spreadsheets.google.com/feeds/cells/17EDt6Pu6xefcwT2C1UsYB7m0Ek-Vb1Us8Azfn3a_eso/1/public/full?alt=json', true);
+    xobj.open('GET', 'https://spreadsheets.google.com/feeds/cells/1J26Xaz21Kdo9mnlT2kbjcOf2Ce11kopnRUFZrWRRpAA/1/public/full?alt=json', true);
+   
     xobj.onreadystatechange = function () {
         if (xobj.readyState == 4 && xobj.status == "200") {
             // .open will NOT return a value but simply returns undefined in async mode so use a callback
