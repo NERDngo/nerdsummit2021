@@ -86,7 +86,7 @@ function createSessionList(dayId, sessions) {
                 <div class="tags">${session.type} </div>
             </div>
             <div class="top-control">
-                <a href="/#${session.id}" onClick="function(e) {e.preventDefault(); return false;}"><span class="plus">+</span><span class="minus hide">-</span></a>
+                <a href="#${session.id}" onClick="function(e) {e.preventDefault(); return false;}"><span class="plus">+</span><span class="minus hide">-</span></a>
             </div>
         </div>
         <div class="info">
