@@ -320,6 +320,23 @@
         }
       }
     }
+
+    &--45-55 {
+      @media (min-width: $tablet) {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        margin-top: 35px;
+
+        > div:first-child {
+          flex-basis: 45%;
+        }
+
+        > div:last-child {
+          flex-basis: 55%;
+        }
+      }
+    }
   }
 
   &__list {
