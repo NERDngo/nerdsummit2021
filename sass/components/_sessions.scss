@@ -165,20 +165,50 @@
 // colors
 
 .red {
-color: $mars-red;
+  color: white;
+  background-color: $mars-red; 
+  font-size: 14px;
+  padding: 2px 4px;
 }
 .blue {
-color: $jumpsuit-blue;
+  color: white;
+  background-color: $jumpsuit-blue;
+  font-size: 14px;
+  padding: 2px 4px;
 }
 .green {
-color: green;
+  color: white;
+  background-color: green;
+  font-size: 14px;
+  padding: 2px 4px;
 }
 .orange {
-color: orange;
+  color: white;
+  background-color: #F15404;
+  font-size: 14px;
+  padding: 2px 4px;
 }
 .yellow {
-color: $rover-gold
+  color:white;
+  background-color: #F1B204;
+  font-size: 14px;
+  padding: 2px 4px;
 }
 .purple {
-color: purple;
+  color: white;
+  background-color: purple;
+  font-size: 14px;
+  padding: 2px 4px;
+}
+.pink {
+  color: white;
+  background-color: pink;
+  font-size: 14px;
+  padding: 2px 4px;
+}
+.coffee {
+  color: white;
+  background-color:#A05C4D;
+  font-size: 14px;
+  padding: 2px 4px;
 }
