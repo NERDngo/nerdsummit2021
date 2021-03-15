@@ -109,6 +109,38 @@
         height: auto;
       }
     }
+    .supporter {
+      width: 300px;
+      margin-left: 20px;
+      margin-right: 20px;
+      text-align: center;
+      min-height: 100px;
+      a:not(.billboard__button) {
+        font-size: 16px;
+        font-weight: 900;
+        color: black;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: border-bottom .2s;
+        &:hover {
+          border-bottom: solid 3px $nerd-blue--dark;
+          color: black;
+        }
+      }
+      p {
+        font-size: 16px;
+        font-weight: 900;
+        color: black;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: border-bottom .2s;
+        margin: 0 20px;
+      }
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
   }
 
   &--about {
