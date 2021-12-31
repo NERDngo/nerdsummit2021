@@ -1,82 +1,89 @@
-
 // Call to function with anonymous callback
 loadJSON(function (response) {
-    //  COMMENT THIS OUT TO GO LIVE WITH SESSIONS
-    // if (!window.location.href.includes("dev.html")) {
-    //     $(".timeslots").remove();
-    //     return null;
-    // }
-    const rows = massageData(JSON.parse(response).feed.entry)
-    const day1 = rows.filter(row => row.day === "1");
-    const day2 = rows.filter(row => row.day === "2");
-    createSessionList("Day-1", day1);
-    createSessionList("Day-2", day2);
+	//  COMMENT THIS OUT TO GO LIVE WITH SESSIONS
+	// if (!window.location.href.includes("dev.html")) {
+	//     $(".timeslots").remove();
+	//     return null;
+	// }
+	const rows = massageData(JSON.parse(response).values);
+	const day1 = rows.filter((row) => row.day === "1");
+	const day2 = rows.filter((row) => row.day === "2");
+	createSessionList("Day-1", day1);
+	createSessionList("Day-2", day2);
 
-    var hash = window.location.hash;
-    if (hash) {
-        var $session = $(hash);
-        if (!$session.length) {
-            return;
-        }
-        $session.click();
-        $('html, body').animate({
-            scrollTop: $session.offset().top - 120 //Minus header + shadow
-        }, 300);
-    }
+	var hash = window.location.hash;
+	if (hash) {
+		var $session = $(hash);
+		if (!$session.length) {
+			return;
+		}
+		$session.click();
+		$("html, body").animate(
+			{
+				scrollTop: $session.offset().top - 120, //Minus header + shadow
+			},
+			300
+		);
+	}
 });
 
-// see https://stackoverflow.com/a/34908037/5855010
+// see https://stackoverflow.com/a/34908037/5855010  (original link for how to do this)
 function loadJSON(callback) {
-    var xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
-    //xobj.open('GET', 'https://spreadsheets.google.com/feeds/cells/17EDt6Pu6xefcwT2C1UsYB7m0Ek-Vb1Us8Azfn3a_eso/1/public/full?alt=json', true);
-    xobj.open('GET', 'https://spreadsheets.google.com/feeds/cells/1J26Xaz21Kdo9mnlT2kbjcOf2Ce11kopnRUFZrWRRpAA/1/public/full?alt=json', true);
-   
-    xobj.onreadystatechange = function () {
-        if (xobj.readyState == 4 && xobj.status == "200") {
-            // .open will NOT return a value but simply returns undefined in async mode so use a callback
-            callback(xobj.responseText);
-        }
-    }
-    xobj.send(null);
+	var xobj = new XMLHttpRequest();
+	xobj.overrideMimeType("application/json");
+	// 2022 - using 2021 sheet for testing, will create 2022 sheet later
+	// this seems to work but is in a different format so parsing needs to change
+	xobj.open("GET", "/data/sessions2021.json", true);
+
+	// 2022 NOTES
+	// shifting to locally saved file.j
+	xobj.onreadystatechange = function () {
+		if (xobj.readyState == 4 && xobj.status == "200") {
+			// .open will NOT return a value but simply returns undefined in async mode so use a callback
+			callback(xobj.responseText);
+		}
+	};
+	xobj.send(null);
 }
 
 function massageData(array) {
-    const keys = array
-        .filter(element => element.gs$cell.row === "1")
-        .map(element => ({ keyName: element.content.$t, columnNumber: element.gs$cell.col }));
+	const keys = array[0];
+	const rawRows = array.slice(1, array.length);
 
-    const rows = array
-        .filter(element => element.gs$cell.row !== "1")
-        .reduce((acc, curr) => {
-            if (typeof acc[curr.gs$cell.row] === 'undefined') {
-                acc[curr.gs$cell.row] = {};
-            }
-            const key = keys.filter(el => el.columnNumber === curr.gs$cell.col).map(el => el.keyName);
-            acc[curr.gs$cell.row][key] = curr.content.$t
-            return acc
-        }, [])
-        .filter(row => row); // because we're using index numbers to fill the array, and we start at 2, the empty elements need to be filtered.
+	const rows = rawRows.map(valuesToObject);
+	function valuesToObject(rawRow) {
+		return keys.reduce(
+			(acc, key, index) => ((acc[key] = rawRow[index]), acc),
+			{}
+		);
+	}
 
-    return rows;
+	return rows;
 }
 
 function createSessionList(dayId, sessions) {
-    const dayElement = document.querySelector(`#${dayId}`);
-    if (!dayElement) { return; }
-    sessions.forEach(session => {
-        let sessionElement = document.createElement('div');
-        sessionElement.className = `session #${session.start}`;
-        sessionElement.innerHTML = sessionTemplate(session);
+	const dayElement = document.querySelector(`#${dayId}`);
+	if (!dayElement) {
+		return;
+	}
+	sessions.forEach((session) => {
+		let sessionElement = document.createElement("div");
+		sessionElement.className = `session #${session.start}`;
+		sessionElement.innerHTML = sessionTemplate(session);
 
-        dayElement.appendChild(sessionElement);
-    })
+		dayElement.appendChild(sessionElement);
+	});
 
-    function sessionTemplate(session) {
-        const speakerLink = session.speakerLink ? `<a href="${session.speakerLink}" class="speaker-link">Link to speaker info</a>` : null;
-        const slideLink = session.slideLink ? `<a href="${session.slideLink}" class="slides-link">Link to slides</a>` : null;
-        const seperator = session.slideLink && session.speakerLink ? `<span> | </span>` : null;
-        return sanitize`
+	function sessionTemplate(session) {
+		const speakerLink = session.speakerLink
+			? `<a href="${session.speakerLink}" class="speaker-link">Link to speaker info</a>`
+			: null;
+		const slideLink = session.slideLink
+			? `<a href="${session.slideLink}" class="slides-link">Link to slides</a>`
+			: null;
+		const seperator =
+			session.slideLink && session.speakerLink ? `<span> | </span>` : null;
+		return sanitize`
         <div class="top" id="${session.id}">
             <div class="top-content">
                 <div class="title"><h4 class="name">${session.name}</h4></div>
@@ -96,12 +103,12 @@ function createSessionList(dayId, sessions) {
             <p>${session.description}</p>
         </div>
         `;
-    }
+	}
 
-    function sanitize(strings, ...values) {
-        const dirty = strings.reduce((prev, next, i) => {
-            return `${prev}${next}${DOMPurify.sanitize(values[i])}`
-        }, '');
-        return dirty;
-    }
+	function sanitize(strings, ...values) {
+		const dirty = strings.reduce((prev, next, i) => {
+			return `${prev}${next}${DOMPurify.sanitize(values[i])}`;
+		}, "");
+		return dirty;
+	}
 }
